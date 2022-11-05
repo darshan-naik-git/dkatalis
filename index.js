@@ -25,7 +25,7 @@ function parkingSystem(fileData) {
 
             if (action === systemCommands[0]) {
 
-                parkings = makeParking(Number(info))
+                parkings = makeParking(parkings, Number(info))
 
             } else if (action === systemCommands[1]) {
 
@@ -53,10 +53,17 @@ function parkingSystem(fileData) {
     }
 }
 
-const makeParking = (size) => {
+const makeParking = (parkings = [], size) => {
 
-    const parkings = [...Array(size)]
-    console.log(`Created parking lot with ${size} slots`)
+    if (parkings.length === 0) {
+        parkings = [...Array(size)]
+        console.log(`Created parking lot with ${size} slots`)
+
+    } else {
+        let newParking = [...Array(size)]
+        parkings = parkings.concat(newParking)
+        console.log(`Created additional parking lot with ${size} slots`)
+    }
     return parkings;
 }
 
